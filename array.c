@@ -35,3 +35,12 @@ Array *filter(Array *src, Predicate predicate)
   memcpy(new_array->array, temp_array, sizeof(int) * count);
   return new_array;
 }
+
+int reduce(Array *src, int context, Reducer reducer)
+{
+  for (int i = 0; i < src->length; i++)
+  {
+    context = (*reducer)(context, src->array[i]);
+  }
+  return context;
+}

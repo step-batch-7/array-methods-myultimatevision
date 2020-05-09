@@ -12,6 +12,11 @@ Bool isEven(int number)
   return number % 2 == 0;
 }
 
+int sum_of_numbers(int sum, int number)
+{
+  return sum + number;
+}
+
 void print_array(Array *list)
 {
   for (int i = 0; i < list->length; i++)
@@ -38,6 +43,9 @@ int main(void)
 
   Array *even_numbers = filter(list, &isEven);
   print_array(even_numbers);
+
+  int sum = reduce(list, 0, &sum_of_numbers);
+  printf("%d\n", sum);
 
   return 0;
 }
