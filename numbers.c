@@ -7,6 +7,15 @@ int square(int number)
   return number * number;
 }
 
+void print_array(Array *list)
+{
+  for (int i = 0; i < list->length; i++)
+  {
+    printf("%d\n", list->array[i]);
+  }
+  printf("\n");
+}
+
 int main(void)
 {
   Array *list = malloc(sizeof(Array));
@@ -19,10 +28,7 @@ int main(void)
   list->array[4] = 5;
   list->array[5] = 6;
   Array *mapped_array = map(list, &square);
-  for (int i = 0; i < mapped_array->length; i++)
-  {
-    printf("%d\n", mapped_array->array[i]);
-  }
+  print_array(mapped_array);
 
   return 0;
 }
