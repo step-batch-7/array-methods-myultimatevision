@@ -11,7 +11,7 @@ Object square(Object data)
   return square;
 }
 
-Bool isEven(Object data)
+Bool is_even(Object data)
 {
   int number = *(int *)data;
   return number % 2 == 0;
@@ -49,7 +49,7 @@ int main(void)
   list->array[5] = &array[5];
   ArrayVoid_ptr mapped_array = map_void(list, &square);
   print_array(mapped_array);
-  ArrayVoid_ptr filtered_array = filter_void(list, &isEven);
+  ArrayVoid_ptr filtered_array = filter_void(list, &is_even);
   print_array(filtered_array);
   int initial = 0;
   Object sum = reduce_void(list, &initial, &sum_of_numbers);
