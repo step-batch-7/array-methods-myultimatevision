@@ -17,11 +17,19 @@ Bool is_even(Object data)
   return number % 2 == 0;
 }
 
+Object sum_of_numbers(Object initial, Object data)
+{
+  int number = *(int *)data;
+  int *sum = malloc(sizeof(int));
+  *sum = *(int *)initial + number;
+  return sum;
+}
+
 ArrayVoid_ptr create_array_from(int *array, int length)
 {
   ArrayVoid_ptr new_array = malloc(sizeof(ArrayVoid));
   new_array->length = length;
-  new_array->array = malloc(sizeof(Object) * 4);
+  new_array->array = malloc(sizeof(Object) * length);
   for (int i = 0; i < length; i++)
   {
     new_array->array[i] = &array[i];
@@ -65,9 +73,31 @@ void test_filter_void()
   print_assert_status(status, "should filter the even numbers in the array");
 }
 
+void test_reduce_void()
+{
+  printf("reduce_void\n");
+
+  int *empty_array;
+
+  ArrayVoid_ptr list = create_array_from(empty_array, 0);
+  int initial_value = 0;
+  int expected_value = 0;
+  Bool status = are_Objects_equal(reduce_void(list, &initial_value, &sum_of_numbers), &expected_value);
+  print_assert_status(status, "should give initial value when array is empty");
+
+  int array[6] = {1, 2, 3, 4, 5, 6};
+  list = create_array_from(array, 6);
+  initial_value = 0;
+  expected_value = 21;
+  reduce_void(list, &initial_value, &sum_of_numbers);
+  status = are_Objects_equal(reduce_void(list, &initial_value, &sum_of_numbers), &expected_value);
+  print_assert_status(status, "should give the sum of elements of the array");
+}
+
 int main(void)
 {
   test_map_void();
   test_filter_void();
+  test_reduce_void();
   return 0;
 }
