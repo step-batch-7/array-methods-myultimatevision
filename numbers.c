@@ -11,15 +11,16 @@ Object square(Object data)
   return square;
 }
 
-// Bool isEven(int number)
-// {
-//   return number % 2 == 0;
-// }
+Bool isEven(Object data)
+{
+  int number = *(int *)data;
+  return number % 2 == 0;
+}
 
-// int sum_of_numbers(int sum, int number)
-// {
-//   return sum + number;
-// }
+int sum_of_numbers(int sum, int number)
+{
+  return sum + number;
+}
 
 void print_array(ArrayVoid_ptr list)
 {
@@ -45,6 +46,8 @@ int main(void)
   list->array[5] = &array[5];
   ArrayVoid_ptr mapped_array = map_void(list, &square);
   print_array(mapped_array);
+  ArrayVoid_ptr filtered_array = filter_void(list, &isEven);
+  print_array(filtered_array);
 
   return 0;
 }
