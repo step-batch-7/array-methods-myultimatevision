@@ -17,9 +17,12 @@ Bool isEven(Object data)
   return number % 2 == 0;
 }
 
-int sum_of_numbers(int sum, int number)
+Object sum_of_numbers(Object initial, Object data)
 {
-  return sum + number;
+  int number = *(int *)data;
+  int *sum = malloc(sizeof(int));
+  *sum = *(int *)initial + number;
+  return sum;
 }
 
 void print_array(ArrayVoid_ptr list)
@@ -48,6 +51,9 @@ int main(void)
   print_array(mapped_array);
   ArrayVoid_ptr filtered_array = filter_void(list, &isEven);
   print_array(filtered_array);
+  int initial = 0;
+  Object sum = reduce_void(list, &initial, &sum_of_numbers);
+  printf("%d\n", *(int *)sum);
 
   return 0;
 }
